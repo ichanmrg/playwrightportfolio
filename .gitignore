@@ -1,0 +1,19 @@
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/allure-results/
+/blob-report/
+/playwright/.cache/
+
+# Ignore local files
+files/*.csv
+files/*.csv.*.bak
+files/*.json
+files/*.json.*.bak
+files/*.xml
+files/*.xml.*.bak
+
+# Ignore environment files
+.env.keys
