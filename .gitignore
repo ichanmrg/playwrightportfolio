@@ -16,7 +16,7 @@ files/*.xml
 files/*.xml.*.bak
 
 # Ignore environment files
-.env.keys
+# .env.keys
 
 # Playwright
 /playwright/.auth/
