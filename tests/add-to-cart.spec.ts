@@ -2,7 +2,7 @@ import * as allure from "allure-js-commons";
 import { expect, test } from "../fixtures/fixtures";
 
 test.describe("Add to Cart", () => {
-    test(`From the inventory page`, async ({ inventoryPage, randomItems }) => {
+    test(`Add to cart from the inventory page`, async ({ inventoryPage, randomItems }) => {
         await allure.step(`Add random item/s from the dashboard to cart`, async () => {
             await inventoryPage.addItemToCart(randomItems);
         });
@@ -12,7 +12,7 @@ test.describe("Add to Cart", () => {
         });
     });
 
-    test(`From the item page`, async ({ randomInventoryItemPage }) => {
+    test(`Add to cart from the item page`, async ({ randomInventoryItemPage }) => {
         await allure.step(`Add random item from the item page to cart`, async () => {
             await randomInventoryItemPage.addItemToCart();
         });

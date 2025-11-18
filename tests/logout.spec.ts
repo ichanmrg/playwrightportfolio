@@ -7,7 +7,7 @@ const inventoryUrl = InventoryPage.URL;
 
 
 test.describe("Logout", () => {
-  test(`From the inventory page`, async ({ inventoryPage, baseURL, page }) => {
+  test(`Logout from the inventory page`, async ({ inventoryPage, baseURL, page }) => {
 
     await allure.step(`Select hamburger menu > Logout`, async () => {
       await inventoryPage.logout();

@@ -31,7 +31,7 @@ test.describe("Remove from Cart", () => {
         });
     });
 
-    test(`From the cart`, async ({ addedItemToCart, cartPage }) => {
+    test(`Remove from the cart`, async ({ addedItemToCart, cartPage }) => {
         await allure.step(`Remove item using its item page`, async () => {
             await cartPage.removeItemFromCart(addedItemToCart);
         });

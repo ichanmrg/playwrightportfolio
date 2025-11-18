@@ -9,7 +9,7 @@ const defaultPassword = process.env.DEFAULT_PASSWORD || "secret_sauce";
 const inventoryUrl = InventoryPage.URL;
 
 test.describe("Login using valid credentials", () => {
-  test(`Using a regular user`, async ({ loginPage }) => {
+  test(`Login using a regular user`, async ({ loginPage }) => {
 
     await allure.step(`Enter valid username (${validUsernames.REGULAR.USERNAME}) and default password`, async () => {
       await loginPage.login(validUsernames.REGULAR.USERNAME, defaultPassword!)
@@ -21,7 +21,7 @@ test.describe("Login using valid credentials", () => {
 
   });
 
-  test(`Using a performance glitched user`, async ({ loginPage }) => {
+  test(`Login using a performance glitched user`, async ({ loginPage }) => {
 
     await allure.step(`Enter valid username (${validUsernames.PERFORMANCE_GLITCH_USER.USERNAME}) and default password`, async () => {
       await loginPage.login(validUsernames.PERFORMANCE_GLITCH_USER.USERNAME, defaultPassword!)
@@ -33,7 +33,7 @@ test.describe("Login using valid credentials", () => {
 
   });
 
-  test(`Using a problem user with known UI issues in inventory`, async ({ loginPage }) => {
+  test(`Login using a problem user with known UI issues in inventory`, async ({ loginPage }) => {
 
     await allure.step(`Enter valid username (${validUsernames.PROBLEM_USER.USERNAME}) and default password`, async () => {
       await loginPage.login(validUsernames.PROBLEM_USER.USERNAME, defaultPassword!)
@@ -47,7 +47,7 @@ test.describe("Login using valid credentials", () => {
 });
 
 test.describe("Login using invalid credentials", () => {
-  test(`Using a locked-out user`, async ({ loginPage }) => {
+  test(`Login using a locked-out user`, async ({ loginPage }) => {
 
     await allure.step(`Enter invalid username (${invalidUsernames.LOCKED_OUT_USER.USERNAME}) and default password`, async () => {
       await loginPage.login(invalidUsernames.LOCKED_OUT_USER.USERNAME, defaultPassword!);
@@ -59,7 +59,7 @@ test.describe("Login using invalid credentials", () => {
 
   });
 
-  test(`Using blank username`, async ({ loginPage }) => {
+  test(`Login using a blank username`, async ({ loginPage }) => {
 
     await allure.step(`Enter invalid username (blank) and default password`, async () => {
       await loginPage.login("", defaultPassword!);
@@ -71,7 +71,7 @@ test.describe("Login using invalid credentials", () => {
 
   });
 
-  test(`Using blank password`, async ({ loginPage }) => {
+  test(`Login using a blank password`, async ({ loginPage }) => {
 
     await allure.step(`Enter valid username (${validUsernames.REGULAR.USERNAME}) and blank password`, async () => {
       await loginPage.login(validUsernames.REGULAR.USERNAME, "")
