@@ -11,7 +11,7 @@ export class InventoryPage extends BasePage {
   private get hamburgerMenuNav(): Locator { return this.page.locator('nav.bm-item-list'); }
 
   async goto(): Promise<void> {
-    Promise.all([this.page.waitForLoadState(), this.page.goto(InventoryPage.URL)]);
+    await Promise.all([this.page.waitForLoadState(), this.page.goto(InventoryPage.URL)]);
   }
 
   async logout(): Promise<void> {
@@ -80,7 +80,7 @@ export class InventoryPage extends BasePage {
   async addItemToCart(itemName: string | string[]): Promise<void> {
     if (typeof itemName === "string") itemName = [itemName];
     for (const name of itemName) {
-      if (await this.isItemInCart(name)) break;
+      if (await this.isItemInCart(name)) continue;
       await this.getAddToCartButton(name).click();
     }
   }
@@ -88,7 +88,7 @@ export class InventoryPage extends BasePage {
   async removeItemFromCart(itemName: string | string[]): Promise<void> {
     if (typeof itemName === "string") itemName = [itemName];
     for (const name of itemName) {
-      if (!(await this.isItemInCart(name))) break;
+      if (!(await this.isItemInCart(name))) continue;
       await this.getRemoveFromCartButton(name).click();
     }
   }

@@ -13,8 +13,6 @@ type TestFx = {
   loginPage: LoginPage;
   inventoryPage: InventoryPage;
   inventoryPageItems: InventoryItem[];
-  inventoryItemPage: InventoryItemPage;
-  inventoryItemDetails: (itemName: string | string[]) => Promise<InventoryItem[]>;
   randomItems: string[];
   randomItem: string;
   randomInventoryItemPage: InventoryItemPage;
@@ -34,7 +32,7 @@ export const test = base.extend<TestFx>({
   },
 
   inventoryPage: async ({ loginPage }, use) => {
-    await loginPage.login(LOGIN_CONSTANTS.VALID.REGULAR.USERNAME, process.env.DEFAULT_PASSWORD!);
+    await loginPage.login(LOGIN_CONSTANTS.VALID.REGULAR.USERNAME, process.env.DEFAULT_PASSWORD || LOGIN_CONSTANTS.VALID.REGULAR.PASSWORD);
     const ip: InventoryPage = new InventoryPage(loginPage.page);
     await use(ip);
   },
@@ -44,29 +42,38 @@ export const test = base.extend<TestFx>({
   },
 
   randomItems: async ({ inventoryPageItems }, use) => {
+    if (inventoryPageItems.length === 0) {
+      await use([]);
+      return;
+    }
     const itemNames: string[] = inventoryPageItems.map(item => item.name);
     const count = faker.number.int({ min: 1, max: itemNames.length });
-    const selected = faker.helpers.arrayElements(itemNames, count);
-    await use(itemNames.length > 0 ? selected : []);
+    await use(faker.helpers.arrayElements(itemNames, count));
   },
 
   randomItem: async ({ inventoryPageItems }, use) => {
+    if (inventoryPageItems.length === 0) {
+      await use("");
+      return;
+    }
     const itemNames: string[] = inventoryPageItems.map(item => item.name);
-    const selected = faker.helpers.arrayElement(itemNames);
-    await use(itemNames.length > 0 ? selected : "");
+    await use(faker.helpers.arrayElement(itemNames));
   },
 
-  randomInventoryItemPage: async ({ inventoryPage, randomItem }, use) => {
+  randomInventoryItemPage: async ({ inventoryPage, randomItem }, use, testInfo) => {
+    if (!randomItem) testInfo.skip();
     await inventoryPage.openInventoryItem(randomItem);
     await use(new InventoryItemPage(inventoryPage.page));
   },
 
-  addedItemToCart: async ({ inventoryPage, randomItem }, use) => {
+  addedItemToCart: async ({ inventoryPage, randomItem }, use, testInfo) => {
+    if (!randomItem) testInfo.skip();
     await inventoryPage.addItemToCart(randomItem);
     await use(randomItem);
   },
 
-  addedItemsToCart: async ({ inventoryPage, randomItems }, use) => {
+  addedItemsToCart: async ({ inventoryPage, randomItems }, use, testInfo) => {
+    if (!randomItems || randomItems.length === 0) testInfo.skip();
     await inventoryPage.addItemToCart(randomItems);
     await use(randomItems);
   },

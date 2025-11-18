@@ -22,8 +22,8 @@ test.describe("Remove from Cart", () => {
         });
 
         await allure.step(`Check if "Add to cart" button is back for the item`, async () => {
-            expect(addedItemToCartViaItemPage.addToCartButton).toBeVisible();
-            expect(addedItemToCartViaItemPage.removeToCartButton).not.toBeVisible();
+            await expect(addedItemToCartViaItemPage.addToCartButton).toBeVisible();
+            await expect(addedItemToCartViaItemPage.removeToCartButton).not.toBeVisible();
         });
 
         await allure.step(`Check if shopping cart count badge is invisible`, async () => {
