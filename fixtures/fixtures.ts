@@ -30,10 +30,11 @@ export const test = base.extend<TestFx>({
     const lp: LoginPage = new LoginPage(page);
     await lp.goto();
     await use(lp);
+    await lp.page.close();
   },
 
   inventoryPage: async ({ loginPage }, use) => {
-    await loginPage.login(LOGIN_CONSTANTS.VALID.REGULAR.USERNAME, process.env.DEFAULT_PASSWORD || "secret_sauce");
+    await loginPage.login(LOGIN_CONSTANTS.VALID.REGULAR.USERNAME, process.env.DEFAULT_PASSWORD!);
     const ip: InventoryPage = new InventoryPage(loginPage.page);
     await use(ip);
   },
