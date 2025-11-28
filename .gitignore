@@ -8,12 +8,14 @@ node_modules/
 /playwright/.cache/
 
 # Ignore local files
+.DS_Store
 files/*.csv
 files/*.csv.*.bak
 files/*.json
 files/*.json.*.bak
 files/*.xml
 files/*.xml.*.bak
+.vscode/
 
 # Ignore environment files
 # .env.keys
