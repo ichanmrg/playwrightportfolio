@@ -15,7 +15,7 @@ files/*.json
 files/*.json.*.bak
 files/*.xml
 files/*.xml.*.bak
-.vscode/
+.vscode
 
 # Ignore environment files
 # .env.keys
