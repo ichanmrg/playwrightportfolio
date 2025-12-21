@@ -1,11 +1,10 @@
 import * as allure from "allure-js-commons";
-import { CheckoutDetails, DEFAULT_TAX_RATE, makeCheckoutDetails } from "../constants/checkout/checkout.constants";
+import { CheckoutDetails, makeCheckoutDetails, DEFAULT_TAX_RATE as taxRate } from "../constants/checkout/checkout.constants";
 import { InventoryItem } from "../constants/inventory/inventory.constants";
 import { expect, test } from "../fixtures/fixtures";
 import { dollarsToCents } from "../utils/string-utils";
 
 const checkoutDetails: CheckoutDetails = makeCheckoutDetails();
-const taxRate: number = DEFAULT_TAX_RATE;
 
 test.describe("Checkout Page > Field tests", () => {
     test(`Leave First Name field`, async ({ addedItemToCart, checkoutPage }) => {
